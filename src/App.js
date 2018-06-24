@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -55,12 +56,19 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen'
+      }
     };
     let persons = null;
     if(this.state.showPersons){
       style.backgroundColor = 'red';
+      style[':hover']={
+        backgroundColor:'salmon'
+      }
       persons = (
+        <StyleRoot>
         <div>
         {
           this.state.persons.map((person, index)=>{
@@ -71,9 +79,9 @@ class App extends Component {
             key={person.id}
             changed={(event) => this.nameChangedHandler(event, person.id)}/>
           })
-        }
-      
+        }      
        </div>
+       </StyleRoot>
       )
     }
     let classes = [];
@@ -97,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
