@@ -14,7 +14,9 @@ class App extends PureComponent {
         {id:'omk121' ,name:'Tim', age:22},
         {id:'oks098' ,name:'Kim', age:23},
         {id:'okl234' ,name: 'Blaze', age:25}
-      ]
+      ],
+      showPersons: false,
+      toggleClicked:0
     }
   }
   componentWillMount(){
@@ -62,8 +64,11 @@ class App extends PureComponent {
     });
   }
   togglePersonHandler = () => {
-    this.setState({
-      showPersons:!this.state.showPersons
+    this.setState((prevState, props)=>{
+      return {
+      showPersons:!this.state.showPersons,
+      toggleClicked:prevState.toggleClicked+1
+      }
     });
   }
   deletePersonHandler = (personIndex) =>{
