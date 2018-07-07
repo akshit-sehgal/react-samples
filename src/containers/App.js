@@ -3,16 +3,38 @@ import cssApp from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
-  state = {
-    persons:[
-      {id:'omk121' ,name:'Tim', age:22},
-      {id:'oks098' ,name:'Kim', age:23},
-      {id:'okl234' ,name: 'Blaze', age:25}
-    ]
+  
+  constructor(props){
+    super(props);
+    console.log('[App.js] inside constructor', props);
+    this.state = {
+      persons:[
+        {id:'omk121' ,name:'Tim', age:22},
+        {id:'oks098' ,name:'Kim', age:23},
+        {id:'okl234' ,name: 'Blaze', age:25}
+      ]
+    }
   }
-  // constructor(props){
-  //   super(props);
-  // }
+  componentWillMount(){
+    console.log('[App.js] inside component will mount');
+
+  }
+  componentDidMount(){
+    console.log('[App.js] inside component did mount');
+
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('[Update App.js] Inside shouldComponentUpdate', nextProps, nextState);
+    let check = nextProps!==this.props.persons;
+    console.log(check);
+    return check;
+  }
+  componentWillUpdate(nextProps,nextState){
+  console.log('[Update Apps.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+  componentDidUpdate(){
+  console.log('[Update App.js] Inside componentDidUpdate'); 
+  }
   clickHandler = (newName) =>{
     this.setState({
       persons:[
@@ -52,7 +74,7 @@ class App extends Component {
     })
   }
   render() {
-    
+    console.log("[App.js] inside render");
     let persons=null;
     if(this.state.showPersons){
       
