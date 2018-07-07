@@ -3,7 +3,8 @@ import cssApp from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Auxiliary';
-import withClass from '../hoc/WithClass2'; 
+import withClass from '../hoc/WithClass2';
+export const AuthContext = React.createContext(false); 
 class App extends PureComponent {
   
   constructor(props){
@@ -45,7 +46,8 @@ class App extends PureComponent {
         {name:'Kim', age:23},
         {name: 'Blaze', age:29}
       ],
-      showPersons: false
+      showPersons: false,
+      authenticated:false
     });
   }
   nameChangedHandler = (event ,id) => {
@@ -62,6 +64,9 @@ class App extends PureComponent {
     this.setState({
       persons
     });
+  }
+  loginHandler = ()=>{
+    this.setState({authenticated: true});
   }
   togglePersonHandler = () => {
     this.setState((prevState, props)=>{
@@ -101,8 +106,11 @@ class App extends PureComponent {
        showPersons={this.state.showPersons}
        persons={this.state.persons}
        clicked={this.togglePersonHandler}
+       login={this.loginHandler}
        />
+       <AuthContext.Provider value={this.state.authenticated}>
        {persons}
+       </AuthContext.Provider>
       </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1',null,'Does this work?'));
