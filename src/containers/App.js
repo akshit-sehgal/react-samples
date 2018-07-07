@@ -108,5 +108,7 @@ class App extends PureComponent {
     // return React.createElement('div', {className: 'App'}, React.createElement('h1',null,'Does this work?'));
   }
 }
-
+App.defaultProps = {
+  title: 'React!!!!!'
+};
 export default withClass(App,cssApp.App);
